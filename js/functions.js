@@ -114,6 +114,7 @@ $(document).on("pagebeforeshow","#add",function() {
         note:$("#ae_note").val()
       },
       function(data, status) {
+        location.reload();
       });
   });
 
