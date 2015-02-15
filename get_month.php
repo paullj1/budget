@@ -43,18 +43,20 @@
       // Build string containing Category: $remaining [=====%    ]
       $li_string = $entry['category'].': '.$str_remaining.' ';
 
-      $percentage = get_percent_spent($entry['cat_id'], $con, $month, $year);
-      if ($percentage > 100) $percentage = 100;
-      if ($percentage < 90) { $color = 'Green'; }
-      else if ($percentage > 90 && $percentage < 100) { $color = 'Yellow'; }
-      else { $color = 'Crimson'; }
-      $bg_color = 'LightGray';
+      if ( $current == 'true' ) {
+        $percentage = get_percent_spent($entry['cat_id'], $con, $month, $year);
+        if ($percentage > 100) $percentage = 100;
+        if ($percentage < 90) { $color = 'Green'; }
+        else if ($percentage > 90 && $percentage < 100) { $color = 'Yellow'; }
+        else { $color = 'Crimson'; }
+        $bg_color = 'LightGray';
+  
+        $div_percentage_container = '<div style="height:100%;width:100%;position:absolute;top:0;left:0;background-color:'.$bg_color.'"></div>';
+        $div_percentage = '<div style="height:100%;width:'.$percentage.'%;position:absolute;top:0;left:0;z-index:10;background-color:'.$color.'"></div>';
+        $div_progress = '<div style="position:relative;width:150px;height:15px">'.$div_percentage_container.$div_percentage.'</div>';
 
-      $div_percentage_container = '<div style="height:100%;width:100%;position:absolute;top:0;left:0;background-color:'.$bg_color.'"></div>';
-      $div_percentage = '<div style="height:100%;width:'.$percentage.'%;position:absolute;top:0;left:0;z-index:10;background-color:'.$color.'"></div>';
-      $div_progress = '<div style="position:relative;width:150px;height:15px">'.$div_percentage_container.$div_percentage.'</div>';
-
-      echo '<li data-role="list-divider">'.$li_string.$div_progress.'</li>';
+        echo '<li data-role="list-divider">'.$li_string.$div_progress.'</li>';
+      } else { echo '<li data-role="list-divider">'.$li_string.'</li>'; }
 
       // For the loop, which category are we currently working on?
       $divider = $entry['category'];
