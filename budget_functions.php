@@ -25,6 +25,14 @@ function get_remaining($category, $con, $month, $year) {
   return floor($goal * 100) / 100;  // Not sure why, but w/o, returns long decimals
 }
 
+function get_percent_spent($category, $con, $month, $year) {
+  $qry_str = 'SELECT goal FROM categories WHERE id='.$category.';';
+  $entry = fetch_array_db(query_db($con, $qry_str));
+  $goal = $entry['goal'];
+  $spent = get_total_spent($category, $con, $month, $year);
+  return floor(($spent/$goal) * 100);
+}
+
 function sec_session_start() {
   $session_name = 'PJKT_Budget';
   $secure = true;
