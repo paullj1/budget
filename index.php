@@ -2,12 +2,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/jquery-mob.css" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="js/jquery.js"></script>
 <script src="js/jquery-mob.js"></script>
 <script src="js/sha512.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/functions.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <script>
 
 $(document).ready(function() {
