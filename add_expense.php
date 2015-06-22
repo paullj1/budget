@@ -1,13 +1,11 @@
 <?php
 
-  require "connect.php"; // Gives us $con
   require "budget_functions.php";
-  
-  sec_session_start();
-  if(login_check($con) == false) {  // Not logged in...
-    echo '<script>alert("You must login!")</script>';
-    return;
-  }  // Else, logged in
+	
+	if ( !check_login() )
+		return;
+
+	$con = connect();
 
   // Sanitize input
   $category = $_POST['category'];
@@ -18,5 +16,6 @@
   // Build Query
   $qry_str = 'INSERT INTO budget(month, year, category, amount, note) VALUES('.date("m").','.date("Y").',\''.$category.'\','.$amount.',\''.$note.'\');';
   query_db($con, $qry_str);
-  return;
+
+	$con = null;
 ?>

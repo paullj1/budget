@@ -1,7 +1,11 @@
 <?php
 
-  require_once "connect.php"; // Gives us $con
   require_once "budget_functions.php";
+
+	if ( !check_login() )
+		return;
+
+	$con = connect();
 
   // Process POST vars
   $command = $_POST['command'];
@@ -16,10 +20,13 @@
     $qry_str = 'UPDATE budget SET category='.$_POST['category'].', amount='.
                 $amount.', note="'.$note.'" WHERE id='.$_POST['id'].';';
   } else {
-    return;  // Unsupported function
+		$con = null;
+		header('Location: '."/");
   }
 
   query_db($con, $qry_str);
-  return;
+
+	$con = null;
+	header('Location: '."/");
 
 ?>

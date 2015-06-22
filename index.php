@@ -1,27 +1,37 @@
+<?php
+	use google\appengine\api\users\User;
+	use google\appengine\api\users\UserService;
+
+	$user = UserService::getCurrentUser();
+
+	if (!$user) {
+  	header('Location: ' . UserService::createLoginURL($_SERVER['REQUEST_URI']));
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/jquery-mob.css" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<script src="js/jquery.js"></script>
-<script src="js/jquery-mob.js"></script>
-<script src="js/sha512.js"></script>
-<script src="js/forms.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <script src="js/functions.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script>
 
 $(document).ready(function() {
-<?php 
-  require_once "connect.php"; // Gives us $con
-  require_once "budget_functions.php";
-  
-  sec_session_start();
-  if(login_check($con) == false) {
-    echo '$.mobile.changePage("#login", {transition: "slidedown"});';
-  }
-?>
+	<?php 
+  	require_once "budget_functions.php";
+
+		if ( check_login() ) {
+			echo '$(".logout_button").each(function() {';
+			echo '	$(this).attr("href","'.UserService::createLogoutUrl('/').'");';
+			echo '});';
+		}
+	?>
 });
 
 </script>
@@ -29,7 +39,7 @@ $(document).ready(function() {
 <body>
 <div data-role="page" id="add">
   <div data-role="header" data-position="fixed" >
-    <a href="#" data-role="button" onclick="logout();" >Logout</a>
+    <a class="logout_button" href="#" data-role="button">Logout</a>
     <h1>Jordan's Budget</h1>
   </div>
   <div data-role="content">
@@ -65,7 +75,7 @@ $(document).ready(function() {
 
 <div data-role="page" id="current">
   <div data-role="header" data-position="fixed" >
-    <a href="#" data-role="button" onclick="logout();" >Logout</a>
+    <a class="logout_button" href="#" data-role="button">Logout</a>
     <h1>Current</h1>
   </div>
   <div data-role="content">
@@ -84,7 +94,7 @@ $(document).ready(function() {
 
 <div data-role="page" id="history">
   <div data-role="header" data-position="fixed" >
-    <a href="#" data-role="button" onclick="logout();" >Logout</a>
+    <a class="logout_button" href="#" data-role="button">Logout</a>
     <h1>History</h1>
   </div>
   <div data-role="content">
@@ -115,27 +125,6 @@ $(document).ready(function() {
   </div>
   <div data-role="content">
   <ul data-role="listview" id="history_month_list"><!--dynamic--></ul>
-  </div>
-</div>
-
-<!-- Login -->
-<div data-role="page" id="login">
-  <div data-role="header" data-position="fixed" >
-    <h1>Login</h1>
-  </div>
-  <div data-role="content">
-    <form action="process_login.php" method="post" name="login_form">
-
-      <!-- Amount -->
-      <label for="username">Username:</label>
-      <input type="text" name="username"><br>
-
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password"><br>
-
-      <!-- Submit -->
-      <input type="button" data-inline="true" value="Login" onclick="formhash(this.form, this.form.password);" />
-    </form>
   </div>
 </div>
 

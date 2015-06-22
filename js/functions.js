@@ -164,9 +164,3 @@ function month_press(in_month, in_year) {
   $.mobile.changePage("#month", {transition: "slide"});
 }
 
-
-// Logout
-function logout() {
-  $.post("logout.php", { }, function(data, status) {});
-  $.mobile.changePage("#login", {transition: "slidedown"});
-}

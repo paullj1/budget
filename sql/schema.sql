@@ -1,31 +1,42 @@
-drop table if exists budget;
-create table budget(
-  id       INTEGER PRIMARY KEY AUTOINCREMENT,
-  month    INTEGER NOT NULL CHECK(month > 0) CHECK(month < 13),
-  year     INTEGER NOT NULL CHECK(year > 2012),
-  category INTEGER NOT NULL,
-  amount   REAL NOT NULL CHECK(amount > 0), 
-  note     CHAR(256)
-);
+-- MySQL dump 10.13  Distrib 5.6.24, for Linux (x86_64)
+--
+-- Current Database: `budget`
+--
 
-drop table if exists categories;
-create table categories(
-  id	   INTEGER PRIMARY KEY AUTOINCREMENT,
-  category CHAR(50) NOT NULL,
-  goal     REAL DEFAULT 0.00 CHECK(goal > 0),
-  visible  INTEGER NOT NULL CHECK(visible >= 0) CHECK(visible <= 1)
-); 
+CREATE DATABASE IF NOT EXISTS `budget` DEFAULT CHARACTER SET utf8;
+USE `budget`;
 
-drop table if exists users;
-create table users(
-  id       INTEGER PRIMARY KEY AUTOINCREMENT,
-  username CHAR(50) NOT NULL,
-  pass     CHAR(128) NOT NULL, -- 512 char hash
-  salt     CHAR(128) NOT NULL -- 128 random hash
-);
+DROP TABLE IF EXISTS `budget`;
+CREATE TABLE `budget`(
+  id       int AUTO_INCREMENT,
+  month    int NOT NULL,
+  year     int NOT NULL,
+  category int NOT NULL,
+  amount   float NOT NULL,
+  note     char(255) CHARACTER SET utf8 COLLATE utf8_bin, 
+	CHECK(month > 0),
+	CHECK(month < 13), 
+	CHECK(year > 2012),
+ 	CHECK(amount > 0),
+	PRIMARY KEY (id)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Primary budget table';
 
-drop table if exists login_attempts;
-create table login_attempts(
-  user_id INTEGER NOT NULL,
-  time   VARCHAR(30) NOT NULL
-);
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories`(
+  `id`			 int AUTO_INCREMENT,
+  `category` char(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `goal`     float NOT NULL,
+  `visible`  int NOT NULL,
+	CHECK(goal > 0),
+	CHECK(visible >= 0),
+	CHECK(visible <= 1),
+	PRIMARY KEY (id)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Categories with associated monthly goals';
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`(
+  `id`       int AUTO_INCREMENT,
+  `email`		 char(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+	PRIMARY KEY (id)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users';
+

@@ -1,13 +1,11 @@
 <?php
 
-  require "connect.php"; // Gives us $con
   include "budget_functions.php";
   
-  sec_session_start();
-  if(login_check($con) == false) {  // NOT LOGGED IN
-    echo '<li>Please Login to view current month</li>';
-    return;
-  }  // ELSE, DISPLAY INFO
+	if ( !check_login() )
+		return;
+
+	$con = connect();
 
   $month = $_POST['month'];
   $year = $_POST['year'];
@@ -67,5 +65,7 @@
           $entry['id'].','.$entry['amount'].')">$'.$entry['amount'].': '.
           $entry['note'].'</a></li>';
   }
+
+	$con = null;
 
 ?>

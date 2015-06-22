@@ -1,0 +1,41 @@
+application: budget-paullj1
+version: 1
+runtime: php55
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+- url: /apple-touch-icon\.png
+  static_files: apple-touch-icon\.png
+  upload: apple-touch-icon\.png
+
+- url: /css
+  static_dir: css
+- url: /js
+  static_dir: js
+
+- url: /
+  script: index.php
+- url: /add_expense.php
+  script: add_expense.php
+- url: /budget_functions.php
+  script: budget_functions.php
+- url: /get_categories.php
+  script: get_categories.php
+- url: /get_category.php
+  script: get_category.php
+- url: /get_history.php
+  script: get_history.php
+- url: /get_month.php
+  script: get_month.php
+- url: /get_note.php
+  script: get_note.php
+- url: /logout.php
+  script: logout.php
+- url: /mod_entry.php
+  script: mod_entry.php
+- url: /process_login.php
+  script: process_login.php

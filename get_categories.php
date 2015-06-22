@@ -1,7 +1,11 @@
 <?php
 
-  require "connect.php"; // Gives us $con
   include "budget_functions.php";
+
+	if ( !check_login() )
+		return;
+
+	$con = connect();
 
   $qry_str = 'SELECT id,category,visible FROM categories;';
   $ret = query_db($con, $qry_str);
@@ -21,4 +25,5 @@
       '.$remaining.'</option>';
     }
   }
+	$con = null;
 ?>

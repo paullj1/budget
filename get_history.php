@@ -1,13 +1,11 @@
 <?php
 
-  require_once "connect.php"; // Gives us $con
   require_once "budget_functions.php";
   
-  sec_session_start();
-  if(login_check($con) == false) {  // NOT LOGGED IN
-    echo '<li>Please Login to view history</li>';
-    return;
-  }  // ELSE, DISPLAY INFO
+	if ( !check_login() )
+		return;
+
+	$con = connect();
 
   $qry_str = 'SELECT DISTINCT month, year FROM budget ORDER BY 
               year DESC, month DESC;';
@@ -39,5 +37,7 @@
   }
   // Make whole list viewable
   echo '<br><br><br>';
+
+	$con = null;
 
 ?>
