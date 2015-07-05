@@ -15,7 +15,7 @@
               as cat_id, budget.amount, budget.note FROM budget JOIN 
               categories ON categories.id=budget.category WHERE 
               budget.month='.$month.' AND budget.year='.$year.' 
-              ORDER BY categories.category ASC;';
+              ORDER BY categories.category ASC, budget.id ASC;';
 
   $qry = query_db($con, $qry_str);
   $divider = "";
