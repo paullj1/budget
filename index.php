@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -41,6 +42,7 @@ $(document).ready(function() {
   <div data-role="header" data-position="fixed" >
     <a class="logout_button" href="#" data-role="button">Logout</a>
     <h1>Jordan's Budget</h1>
+		<a href="#settings" data-transition="slideup" data-role="button" data-icon="grid" class="ui-btn-right">Settings</a>
   </div>
   <div data-role="content">
     <form action="#" method="post" id="ae_form"> <!-- Requires a label -->
@@ -117,6 +119,27 @@ $(document).ready(function() {
 <!--  POPUPS  --!>
 <!--          --!>
 
+<!-- Settings Functions -->
+<div data-role="page" id="settings">
+  <div data-role="header" data-position="fixed" >
+    <a href="#" data-role="button" data-rel="back" data-icon="back">Back</a>
+    <h1>Settings</h1>
+  </div>
+  <div data-role="content">
+		<div>
+
+			<!-- Run rollover with last month's goals -->
+			<button id="okay-button">Rollover</button>
+
+			<!-- Set Goals -->
+			<div id="list-of-goals"><!--Dynamic--></div>
+			<!-- Save -->
+			<button id="save-button">Save</button>
+
+		</div>
+  </div>
+</div>
+
 <!-- View old month -->
 <div data-role="page" id="month">
   <div data-role="header" data-position="fixed" >
@@ -124,7 +147,7 @@ $(document).ready(function() {
     <h1>History</h1>
   </div>
   <div data-role="content">
-  <ul data-role="listview" id="history_month_list"><!--dynamic--></ul>
+  	<ul data-role="listview" id="history_month_list"><!--dynamic--></ul>
   </div>
 </div>
 

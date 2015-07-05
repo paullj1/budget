@@ -164,3 +164,61 @@ function month_press(in_month, in_year) {
   $.mobile.changePage("#month", {transition: "slide"});
 }
 
+// Grab variables before page shows
+$(document).on("pagebeforeshow","#settings",function(){ 
+	get_goal_data();
+
+	// Connect Update Functions
+	$(".goal-form-sliders").on( 'slidestop', function( event ) { 
+		var id = 0;
+		if ( event.currentTarget.id == "fan-switch" ) id = FAN_ID;
+		if ( event.currentTarget.id == "override-switch" ) id = OVERRIDE_ID;
+
+		if ( id != 0 ) 
+			set_val_db(id, event.currentTarget.value);
+	});
+
+	$(".goal-form-radios").bind( "change", function(event, ui) {
+		set_val_db(MODE_ID, event.currentTarget.value);
+	});
+});
+
+function get_goal_data() {
+	$.ajax({
+		type : "POST",
+		async: false,
+		url : "get_goals.php",
+		cache : false,
+		dataType : "json",
+		success : populate_goals,
+		error: function(xhr) { console.log("AJAX request failed: " + xhr.status); }
+	});
+}
+
+function populate_goals(data) {
+	console.dir(data); // for debug
+	var i = 0;
+	var output = "<div class='ui-grid-b'><div class='ui-block-a'><b>Category</b></div><div class='ui-block-b'><b>Goal</b></div><div class='ui-block-c'><b>Visible</b></div></div>";
+	for (i=0;i<data.goals.length;i++) { 
+		output += "<div class='ui-grid-b categories' id='"+data.goals[i].category+"'>";
+		output += "<div class='ui-block-a'>"+data.goals[i].category+"</div>";
+		output += "<input class='ui-block-b' id='"+data.goals[i].category+"-goal' type='number' value='"+data.goals[i].goal+"'></input>";
+		if (data.goals[i].visible == '1')
+			output += "<input type='checkbox' class='ui-block-c' id='"+data.goals[i].category+"-visible' data-role='flipswitch' checked></input>";
+		else 
+			output += "<input type='checkbox' class='ui-block-c' id='"+data.goals[i].category+"-visible' data-role='flipswitch'></input>";
+		output += "</div>";
+	}
+	$("#list-of-goals").html(output);
+	$("#save-button").click(function() {
+		var categories = [];
+		$(".categories").each(function(index) {
+			var category = {category:"", goal:"0", visible:false};
+			category.category = $(this).attr("id");
+			category.goal = $(this).find("#"+category.category+"-goal").val();
+			category.visible = $(this).find("#"+category.category+"-visible").is(':checked');
+			categories.push(category);
+		});
+		console.log(categories);
+	});
+}

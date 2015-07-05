@@ -39,3 +39,5 @@ handlers:
   script: mod_entry.php
 - url: /process_login.php
   script: process_login.php
+- url: /get_goals.php
+  script: get_goals.php
