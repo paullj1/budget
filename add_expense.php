@@ -1,6 +1,6 @@
 <?php
 
-  require "budget_functions.php";
+  require_once "budget_functions.php";
 	
 	if ( !check_login() )
 		return;

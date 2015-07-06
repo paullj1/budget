@@ -101,23 +101,8 @@ function get_categories(sel) {
 }
 
 $(document).on("pagebeforeshow","#add",function() {
-
   // Update Categories
   get_categories("#ae_category");
-
-  // Event Handlers
-  $("#ae_form").submit(function() {
-    $.post("add_expense.php",
-      {
-        category:$("#ae_category").val(),
-        amount:$("#ae_amount").val(),
-        note:$("#ae_note").val()
-      },
-      function(data, status) {
-        parent.window.location.reload();
-      });
-  });
-
 });
   
 ////////////////////

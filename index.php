@@ -36,9 +36,21 @@ $(document).ready(function() {
 	$("#rollover-button").click(function() {
 			$.post("run_rollover.php",
 				{ year:new Date().getFullYear(), month:new Date().getMonth(), },
- 				function(data,status) { if(status != "success") { alert("Error running rollover."); parent.window.location.reload();} }
+ 				function(data,status) { if(status != "success") { alert("Error running rollover.");} }
 		);
 	});
+
+  $("#ae_button").click(function() {
+    $.post("add_expense.php",
+      {
+        category:$("#ae_category").val(),
+        amount:$("#ae_amount").val(),
+        note:$("#ae_note").val()
+      },
+      function(data, status) {
+        parent.window.location.reload();
+      });
+  });
 });
 
 </script>
@@ -51,7 +63,6 @@ $(document).ready(function() {
 		<a href="#settings" data-transition="slideup" data-role="button" data-icon="grid" class="ui-btn-right">Settings</a>
   </div>
   <div data-role="content">
-    <form action="#" method="post" id="ae_form"> <!-- Requires a label -->
 
       <!-- Cateogry -->
       <label for="category">Select Category</label>
@@ -66,9 +77,8 @@ $(document).ready(function() {
       <textarea name="note" id="ae_note" placeholder="Note..."></textarea><br>
 
       <!-- Submit -->
-      <input type="submit" data-inline="true" value="Submit">
+      <button id="ae_button" data-inline="true" data-role="button">Submit</button>
 
-    </form>
   </div>
   <div data-role="footer" data-position="fixed" >
     <div data-role="navbar">
