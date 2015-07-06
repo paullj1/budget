@@ -172,7 +172,6 @@ function populate_goals(data,status) {
 		output += "</div>";
 	}
 	$("#list-of-goals").html(output);
-	$("#save-button").click(save_changes);
 }
 
 function save_changes() {

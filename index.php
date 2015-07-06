@@ -51,6 +51,7 @@ $(document).ready(function() {
         parent.window.location.reload();
       });
   });
+	$("#save-button").click(save_changes);
 });
 
 </script>
