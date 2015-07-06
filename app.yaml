@@ -43,3 +43,5 @@ handlers:
   script: get_goals.php
 - url: /update_goals.php
   script: update_goals.php
+- url: /run_rollover.php
+  script: run_rollover.php

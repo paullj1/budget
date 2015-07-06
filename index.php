@@ -33,6 +33,12 @@ $(document).ready(function() {
 			echo '});';
 		}
 	?>
+	$("#rollover-button").click(function() {
+			$.post("run_rollover.php",
+				{ year:new Date().getFullYear(), month:new Date().getMonth(), },
+ 				function(data,status) { if(status != "success") { alert("Error running rollover."); parent.window.location.reload();} }
+		);
+	});
 });
 
 </script>
@@ -129,7 +135,7 @@ $(document).ready(function() {
 		<div>
 
 			<!-- Run rollover with last month's goals -->
-			<button id="okay-button">Rollover</button>
+			<button id="rollover-button">Rollover</button>
 
 			<!-- Set Goals -->
 			<div id="list-of-goals"><!--Dynamic--></div>
