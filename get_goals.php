@@ -12,7 +12,8 @@
   $qry = query_db($con, $qry_str);
 	$response = '{"status":"1","goals":[';
   while ($entry = fetch_array_db($qry)) {
-		$response .= '{"category":"'.$entry['category'].'",';
+		$response .= '{"id":"'.$entry['id'].'",';
+		$response .= '"category":"'.$entry['category'].'",';
 		$response .= '"goal":"'.$entry['goal'].'",';
 		$response .= '"visible":"'.$entry['visible'].'"},';
 	}

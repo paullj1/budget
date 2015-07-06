@@ -41,3 +41,5 @@ handlers:
   script: process_login.php
 - url: /get_goals.php
   script: get_goals.php
+- url: /update_goals.php
+  script: update_goals.php
