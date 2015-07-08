@@ -77,7 +77,7 @@ function check_login() {
 	$authd_users = get_authorized_users($con);
 
 	for ( $i = 0; $i < count($authd_users); $i++ )
-		if ( $authd_users[$i] == $email ) {
+		if ( strtolower($authd_users[$i]) == strtolower($email) ) {
 			$con = null;
 			return true;
 		}
