@@ -1,10 +1,12 @@
 <?php
+ 	require_once "budget_functions.php";
+
 	use google\appengine\api\users\User;
 	use google\appengine\api\users\UserService;
 
 	$user = UserService::getCurrentUser();
 
-	if (!$user) {
+	if (!$user || !check_login()) {
   	header('Location: ' . UserService::createLoginURL($_SERVER['REQUEST_URI']));
 	}
 ?>
@@ -25,7 +27,6 @@
 
 $(document).ready(function() {
 	<?php 
-  	require_once "budget_functions.php";
 
 		if ( check_login() ) {
 			echo '$(".logout_button").each(function() {';
