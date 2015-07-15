@@ -82,7 +82,7 @@ function check_login() {
 			return true;
 		}
 	$con = null;
-	echo 'alert("Unauthorized User!");';
+	//echo 'alert("Unauthorized User!");';
 	return false;
 
 }
