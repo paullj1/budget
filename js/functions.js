@@ -190,3 +190,14 @@ function save_changes() {
 		function(data,status) { }
 	);
 }
+
+function add_category() {
+	// Update database
+	var category = prompt("Enter category name:", "Groceries");
+	var goal = prompt("Enter the goal:", "200");
+	$.post("update_goals.php", { 
+			category: category,
+			goal: goal
+		}, function(data,status) { }
+	);
+}

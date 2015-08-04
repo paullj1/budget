@@ -53,6 +53,7 @@ $(document).ready(function() {
       });
   });
 	$("#save-button").click(save_changes);
+	$("#add-category-button").click(add_category);
 });
 
 </script>
@@ -153,6 +154,8 @@ $(document).ready(function() {
 			<div id="list-of-goals"><!--Dynamic--></div>
 			<!-- Save -->
 			<button id="save-button">Save</button>
+			<!-- Add Category -->
+			<button id="add-category-button">Add</button>
 
 		</div>
   </div>
