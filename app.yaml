@@ -45,3 +45,5 @@ handlers:
   script: update_goals.php
 - url: /run_rollover.php
   script: run_rollover.php
+- url: /add_category.php
+  script: add_category.php
