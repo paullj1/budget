@@ -12,11 +12,11 @@
 
 	if ($month == 0) { $month = 12; $year--; }
 
-  $qry_str = 'SELECT SUM(amount) FROM budget WHERE month='.$month.' AND year='.$year.' AND (category=1 OR category=2);';
+  $qry_str = 'SELECT SUM(amount) FROM budget WHERE month='.$month.' AND year='.$year.' AND (category=1 OR category=2 OR category=5);';
   $entry = fetch_array_db(query_db($con, $qry_str));
   $amount_spent = $entry['SUM(amount)'];
 
-  $qry_str = 'SELECT SUM(goal) FROM categories WHERE id=1 OR id=2;';
+  $qry_str = 'SELECT SUM(goal) FROM categories WHERE id=1 OR id=2 OR id=5;';
   $entry = fetch_array_db(query_db($con, $qry_str));
   $goals = $entry['SUM(goal)'];
 
