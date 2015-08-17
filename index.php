@@ -35,9 +35,14 @@ $(document).ready(function() {
 		}
 	?>
 	$("#rollover-button").click(function() {
-			$.post("run_rollover.php",
-				{ year:new Date().getFullYear(), month:new Date().getMonth(), },
- 				function(data,status) { if(status != "success") { alert("Error running rollover.");} }
+		$.post("run_rollover.php",
+			{ 
+				year:new Date().getFullYear(), 
+				month:new Date().getMonth() 
+			}, function(data,status) { 
+				if(status != "success") alert("Error running rollover.");
+				else alert("Success");
+			}
 		);
 	});
 
