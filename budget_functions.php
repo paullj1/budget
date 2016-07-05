@@ -8,7 +8,7 @@ function connect() {
 	$con = mysqli_connect(
   	null,
   	'root', // username
-  	'root', // password
+  	'root', // password (cannot be empty)
   	'budget', // database name
   	null,
   	'/cloudsql/budget-paullj1:db'
