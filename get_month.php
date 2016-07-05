@@ -11,11 +11,10 @@
   $year = $_POST['year'];
   $current = $_POST['current'];
 
-  $qry_str = 'SELECT budget.id, categories.category, budget.category 
-              as cat_id, budget.amount, budget.note FROM budget JOIN 
-              categories ON categories.id=budget.category WHERE 
-              budget.month='.$month.' AND budget.year='.$year.' 
-              ORDER BY categories.category ASC, budget.id ASC;';
+  $qry_str = 'SELECT budget.id, categories.category, budget.category as cat_id,
+  budget.amount, budget.note FROM budget JOIN categories ON
+  categories.id=budget.category WHERE budget.month='.$month.' AND
+  budget.year='.$year.' ORDER BY categories.category ASC, budget.id ASC;';
 
   $qry = query_db($con, $qry_str);
   $divider = "";
