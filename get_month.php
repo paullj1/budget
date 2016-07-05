@@ -16,7 +16,6 @@
   categories.id=budget.category WHERE budget.month='.$month.' AND
   budget.year='.$year.' ORDER BY categories.category ASC, budget.id ASC;';
 
-
   $qry = query_db($con, $qry_str);
   $divider = "";
   while ($entry = fetch_array_db($qry)) {
